@@ -81,15 +81,132 @@
       min-height: 100px;
     }
 
-     body {
-  margin: 0;
-  padding: 0;
-}
+    /* Estilos para las tablas de resultados */
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
-nav.navbar {
-  margin-top: 0 !important;
-  border-radius: 0 0 1rem 1rem; /* solo redondeado abajo */
-}
+    .result-table th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 8px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .result-table td {
+      padding: 10px 8px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+      font-size: 13px;
+    }
+
+    .result-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    .result-table tr:hover {
+      background-color: #e3f2fd;
+    }
+
+    .iteration-row {
+      background: linear-gradient(90deg, #f0f8ff 0%, #e6f3ff 100%);
+      font-weight: 500;
+    }
+
+    .success-row {
+      background: linear-gradient(90deg, #d4edda 0%, #c3e6cb 100%);
+      font-weight: 600;
+      color: #155724;
+    }
+
+    .warning-row {
+      background: linear-gradient(90deg, #fff3cd 0%, #ffeaa7 100%);
+      font-weight: 600;
+      color: #856404;
+    }
+
+    .matrix-display {
+      background: #f8f9fa;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .solution-highlight {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      text-align: center;
+      font-weight: 600;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .verification-section {
+      background: #e8f5e8;
+      border: 2px solid #28a745;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+
+    .verification-title {
+      color: #155724;
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status-warning {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+    }
+
+    .status-info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    nav.navbar {
+      margin-top: 0 !important;
+      border-radius: 0 0 1rem 1rem; /* solo redondeado abajo */
+    }
 
     #matrixForm {
       margin-top: 20px;
@@ -115,6 +232,11 @@ nav.navbar {
     <div class="mb-3">
       <label for="matrixSize" class="form-label">Tamaño de la matriz (m x n)</label>
       <input type="number" class="form-control" id="matrixSize" min="2" max="10" placeholder="Ejemplo: 3">
+    </div>
+    <div class="mb-3">
+      <label for="tolerance" class="form-label">Significancia (Tolerancia)</label>
+      <input type="number" class="form-control" id="tolerance" min="0.000001" max="1" step="0.000001" value="0.0001" placeholder="Ejemplo: 0.0001">
+      <div class="form-text">Valor entre 0.000001 y 1. Valores más pequeños = mayor precisión</div>
     </div>
     <button class="btn btn-outline-primary btn-lg w-100" onclick="generateMatrix()">
       <i class="bi bi-grid-3x3-gap-fill me-2"></i>Generar Matriz
@@ -160,144 +282,210 @@ nav.navbar {
     container.innerHTML = html;
   }
 
-
-
-  //  EN REVISION
-  // function solveJacobi() {
-  //   const size = parseInt(document.getElementById("matrixSize").value);
-  //   const form = document.getElementById("matrixData");
-  //   if (!form) return;
-
-  //   const A = [], B = [];
-  //   for (let i = 0; i < size; i++) {
-  //     A[i] = [];
-  //     for (let j = 0; j < size; j++) {
-  //       const value = parseFloat(form.querySelector(`[name="a-${i}-${j}"]`).value);
-  //       A[i][j] = isNaN(value) ? 0 : value;
-  //     }
-  //     const bValue = parseFloat(form.querySelector(`[name="b-${i}"]`).value);
-  //     B[i] = isNaN(bValue) ? 0 : bValue;
-  //   }
-
-  //   const tolerance = 0.0001;
-  //   const maxIterations = 100;
-  //   let X = Array(size).fill(0);
-  //   let resultLog = `📌 Método de Jacobi\nTolerancia: ${tolerance}\nMáx Iteraciones: ${maxIterations}\n\n`;
-
-  //   for (let k = 1; k <= maxIterations; k++) {
-  //     let Xnueva = [];
-  //     for (let i = 0; i < size; i++) {
-  //       let suma = B[i];
-  //       for (let j = 0; j < size; j++) {
-  //         if (j !== i) {
-  //           suma -= A[i][j] * X[j];
-  //         }
-  //       }
-  //       Xnueva[i] = suma / A[i][i];
-  //     }
-
-  //     let error = Math.max(...X.map((val, i) => Math.abs((Xnueva[i] - val) / (Xnueva[i] || 1)) * 100));
-  //     resultLog += `Iteración ${k}: [${Xnueva.map(val => val.toFixed(6)).join(", ")}] - Error: ${error.toFixed(6)}%\n`;
-
-  //     if (error < tolerance) {
-  //       resultLog += `\n✅ Convergencia alcanzada en ${k} iteraciones.`;
-  //       document.getElementById("resultArea").innerText = resultLog;
-  //       return;
-  //     }
-
-  //     X = [...Xnueva];
-  //   }
-
-  //   resultLog += `\n⚠️ No se alcanzó la convergencia después de ${maxIterations} iteraciones.`;
-  //   document.getElementById("resultArea").innerText = resultLog;
-  // }
-
-
-
-  //SEGUNDA PRUEBA
   function solveJacobi() {
-  const size = parseInt(document.getElementById("matrixSize").value);
-  const form = document.getElementById("matrixData");
-  if (!form) return;
+    const size = parseInt(document.getElementById("matrixSize").value);
+    const form = document.getElementById("matrixData");
+    if (!form) return;
 
-  const A = [], B = [];
-  for (let i = 0; i < size; i++) {
-    A[i] = [];
-    for (let j = 0; j < size; j++) {
-      const value = parseFloat(form.querySelector(`[name="a-${i}-${j}"]`).value);
-      A[i][j] = isNaN(value) ? 0 : value;
+    const A = [], B = [];
+    for (let i = 0; i < size; i++) {
+      A[i] = [];
+      for (let j = 0; j < size; j++) {
+        const value = parseFloat(form.querySelector(`[name="a-${i}-${j}"]`).value);
+        A[i][j] = isNaN(value) ? 0 : value;
+      }
+      const bValue = parseFloat(form.querySelector(`[name="b-${i}"]`).value);
+      B[i] = isNaN(bValue) ? 0 : bValue;
     }
-    const bValue = parseFloat(form.querySelector(`[name="b-${i}"]`).value);
-    B[i] = isNaN(bValue) ? 0 : bValue;
-  }
 
-  // 🔵 ORDENAR LA MATRIZ
-  const usedRows = new Set();
-  const A_sorted = [];
-  const B_sorted = [];
+    let resultHTML = `<h4 class="mb-3">📊 Resultados del Método Jacobi</h4>`;
+    
+    // Mostrar matriz original
+    resultHTML += `<div class="matrix-display">`;
+    resultHTML += `<strong>📌 Matriz Original:</strong><br>`;
+    for (let i = 0; i < size; i++) {
+      resultHTML += `${A[i].map(v => v.toFixed(2)).join(" &nbsp;&nbsp; ")} &nbsp;&nbsp; = &nbsp;&nbsp; ${B[i].toFixed(2)}<br>`;
+    }
+    resultHTML += `</div>`;
 
-  for (let col = 0; col < size; col++) {
-    let bestRow = -1;
-    let maxVal = -Infinity;
-    for (let row = 0; row < size; row++) {
-      if (!usedRows.has(row) && Math.abs(A[row][col]) > maxVal) {
-        maxVal = Math.abs(A[row][col]);
-        bestRow = row;
+    // Verificar si la matriz es diagonalmente dominante
+    let isDominant = true;
+    for (let i = 0; i < size; i++) {
+      const diagonal = Math.abs(A[i][i]);
+      const offDiagonalSum = A[i].reduce((sum, val, j) => sum + (i !== j ? Math.abs(val) : 0), 0);
+      if (diagonal <= offDiagonalSum) {
+        isDominant = false;
+        break;
       }
     }
-    if (bestRow !== -1) {
-      usedRows.add(bestRow);
-      A_sorted.push(A[bestRow]);
-      B_sorted.push(B[bestRow]);
-    }
-  }
 
-  // Si quedaron filas no utilizadas (por si no todos los X tenían filas grandes), las agregamos al final
-  for (let row = 0; row < size; row++) {
-    if (!usedRows.has(row)) {
-      A_sorted.push(A[row]);
-      B_sorted.push(B[row]);
-    }
-  }
+    if (!isDominant) {
+      resultHTML += `<div class="alert alert-warning">`;
+      resultHTML += `<span class="status-badge status-warning">⚠️ Advertencia</span> La matriz no es diagonalmente dominante. Intentando reordenar...`;
+      resultHTML += `</div>`;
+      
+      // Intentar reordenar la matriz para mejorar la convergencia
+      const used = new Set();
+      const newA = [];
+      const newB = [];
 
-  const tolerance = 0.01;
-  const maxIterations = 100;
-  let X = Array(size).fill(0);
-  let resultLog = `📌 Método de Jacobi\nTolerancia: ${tolerance}\nMáx Iteraciones: ${maxIterations}\n\n📌 Matriz reordenada\n`;
+      for (let col = 0; col < size; col++) {
+        let maxRow = -1;
+        let maxValue = -Infinity;
 
-  for (let i = 0; i < size; i++) {
-    resultLog += `${A_sorted[i].map((coef, idx) => `${coef >= 0 && idx > 0 ? '' : ''}${coef}`).join(' ')} = ${B_sorted[i]}\n`;
-  }
-  resultLog += '\n';
+        for (let i = 0; i < size; i++) {
+          if (!used.has(i) && Math.abs(A[i][col]) > maxValue) {
+            maxValue = Math.abs(A[i][col]);
+            maxRow = i;
+          }
+        }
 
-  for (let k = 1; k <= maxIterations; k++) {
-    let Xnueva = [];
-    for (let i = 0; i < size; i++) {
-      let suma = B_sorted[i];
-      for (let j = 0; j < size; j++) {
-        if (j !== i) {
-          suma -= A_sorted[i][j] * X[j];
+        if (maxRow !== -1) {
+          used.add(maxRow);
+          newA.push(A[maxRow]);
+          newB.push(B[maxRow]);
         }
       }
-      Xnueva[i] = suma / A_sorted[i][i];
+
+      // Si quedaron filas sin usar, agregarlas al final
+      for (let i = 0; i < size; i++) {
+        if (!used.has(i)) {
+          newA.push(A[i]);
+          newB.push(B[i]);
+        }
+      }
+
+      resultHTML += `<div class="matrix-display">`;
+      resultHTML += `<strong>🔄 Matriz Reordenada:</strong><br>`;
+      for (let i = 0; i < size; i++) {
+        resultHTML += `${newA[i].map(v => v.toFixed(2)).join(" &nbsp;&nbsp; ")} &nbsp;&nbsp; = &nbsp;&nbsp; ${newB[i].toFixed(2)}<br>`;
+      }
+      resultHTML += `</div>`;
+
+      // Verificar si la matriz reordenada es diagonalmente dominante
+      let isReorderedDominant = true;
+      for (let i = 0; i < size; i++) {
+        const diagonal = Math.abs(newA[i][i]);
+        const offDiagonalSum = newA[i].reduce((sum, val, j) => sum + (i !== j ? Math.abs(val) : 0), 0);
+        if (diagonal <= offDiagonalSum) {
+          isReorderedDominant = false;
+          break;
+        }
+      }
+
+      if (!isReorderedDominant) {
+        resultHTML += `<div class="alert alert-warning">`;
+        resultHTML += `<span class="status-badge status-warning">⚠️ Advertencia</span> La matriz reordenada tampoco es diagonalmente dominante. El método podría no converger.`;
+        resultHTML += `</div>`;
+      } else {
+        resultHTML += `<div class="alert alert-success">`;
+        resultHTML += `<span class="status-badge status-success">✅ Éxito</span> La matriz reordenada es diagonalmente dominante.`;
+        resultHTML += `</div>`;
+      }
+
+      // Usar la matriz reordenada
+      A.length = 0;
+      B.length = 0;
+      A.push(...newA);
+      B.push(...newB);
+    } else {
+      resultHTML += `<div class="alert alert-success">`;
+      resultHTML += `<span class="status-badge status-success">✅ Éxito</span> La matriz es diagonalmente dominante.`;
+      resultHTML += `</div>`;
     }
 
-    let error = Math.max(...X.map((val, i) => Math.abs((Xnueva[i] - val) / (Xnueva[i] || 1)) * 100));
-    resultLog += `Iteración ${k}: [${Xnueva.map(val => val.toFixed(6)).join(", ")}] - Error: ${error.toFixed(6)}%\n`;
+    // Obtener la tolerancia del usuario
+    const tolerance = parseFloat(document.getElementById("tolerance").value);
+    const maxIterations = Math.max(100, size * 20);
+    let X = Array(size).fill(0);
 
-    if (error < tolerance) {
-      resultLog += `\n✅ Convergencia alcanzada en ${k} iteraciones.`;
-      document.getElementById("resultArea").innerText = resultLog;
-      return;
+    resultHTML += `<div class="alert alert-info">`;
+    resultHTML += `<strong>📌 Parámetros del método:</strong><br>`;
+    resultHTML += `• Tolerancia: ${tolerance}<br>`;
+    resultHTML += `• Máximo de iteraciones: ${maxIterations}`;
+    resultHTML += `</div>`;
+
+    // Tabla de iteraciones
+    resultHTML += `<table class="result-table">`;
+    resultHTML += `<thead>`;
+    resultHTML += `<tr>`;
+    resultHTML += `<th>Iteración</th>`;
+    for (let i = 0; i < size; i++) {
+      resultHTML += `<th>X${i + 1}</th>`;
+    }
+    resultHTML += `<th>Error</th>`;
+    resultHTML += `</tr>`;
+    resultHTML += `</thead>`;
+    resultHTML += `<tbody>`;
+
+    let converged = false;
+    let finalIteration = 0;
+
+    for (let k = 1; k <= maxIterations; k++) {
+      let Xnueva = [];
+      for (let i = 0; i < size; i++) {
+        let suma = B[i];
+        for (let j = 0; j < size; j++) {
+          if (j !== i) {
+            suma -= A[i][j] * X[j];
+          }
+        }
+        Xnueva[i] = suma / A[i][i];
+      }
+
+      // Calcular el error usando la fórmula estándar de métodos numéricos
+      let maxError = 0;
+      for (let i = 0; i < size; i++) {
+        const error = Math.abs(Xnueva[i] - X[i]);
+        if (error > maxError) {
+          maxError = error;
+        }
+      }
+
+      // Determinar la clase de la fila
+      let rowClass = "iteration-row";
+      if (maxError < tolerance) {
+        rowClass = "success-row";
+        converged = true;
+        finalIteration = k;
+      }
+
+      resultHTML += `<tr class="${rowClass}">`;
+      resultHTML += `<td><strong>${k}</strong></td>`;
+      for (let i = 0; i < size; i++) {
+        resultHTML += `<td>${Xnueva[i].toFixed(6)}</td>`;
+      }
+      resultHTML += `<td><strong>${maxError.toFixed(8)}</strong></td>`;
+      resultHTML += `</tr>`;
+
+      if (maxError < tolerance) {
+        break;
+      }
+
+      X = [...Xnueva];
     }
 
-    X = [...Xnueva];
+    resultHTML += `</tbody>`;
+    resultHTML += `</table>`;
+
+    if (converged) {
+      resultHTML += `<div class="solution-highlight">`;
+      resultHTML += `🎯 <strong>Solución Final</strong><br>`;
+      resultHTML += `Convergencia alcanzada en ${finalIteration} iteraciones<br>`;
+      resultHTML += `[${X.map(val => val.toFixed(6)).join(", ")}]`;
+      resultHTML += `</div>`;
+    } else {
+      resultHTML += `<div class="alert alert-warning">`;
+      resultHTML += `<span class="status-badge status-warning">⚠️ Sin Convergencia</span> No se alcanzó la convergencia después de ${maxIterations} iteraciones.`;
+      resultHTML += `</div>`;
+      resultHTML += `<div class="solution-highlight">`;
+      resultHTML += `📊 <strong>Última Aproximación</strong><br>`;
+      resultHTML += `[${X.map(val => val.toFixed(6)).join(", ")}]`;
+      resultHTML += `</div>`;
+    }
+
+    document.getElementById("resultArea").innerHTML = resultHTML;
   }
-
-  resultLog += `\n⚠️ No se alcanzó la convergencia después de ${maxIterations} iteraciones.`;
-  document.getElementById("resultArea").innerText = resultLog;
-}
-
 </script>
 
 </body>

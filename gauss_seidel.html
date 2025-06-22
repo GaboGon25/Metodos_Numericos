@@ -82,6 +82,123 @@
       min-height: 100px;
     }
 
+    /* Estilos para las tablas de resultados */
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .result-table th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 8px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .result-table td {
+      padding: 10px 8px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+      font-size: 13px;
+    }
+
+    .result-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    .result-table tr:hover {
+      background-color: #e3f2fd;
+    }
+
+    .iteration-row {
+      background: linear-gradient(90deg, #f0f8ff 0%, #e6f3ff 100%);
+      font-weight: 500;
+    }
+
+    .success-row {
+      background: linear-gradient(90deg, #d4edda 0%, #c3e6cb 100%);
+      font-weight: 600;
+      color: #155724;
+    }
+
+    .warning-row {
+      background: linear-gradient(90deg, #fff3cd 0%, #ffeaa7 100%);
+      font-weight: 600;
+      color: #856404;
+    }
+
+    .matrix-display {
+      background: #f8f9fa;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .solution-highlight {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      text-align: center;
+      font-weight: 600;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .verification-section {
+      background: #e8f5e8;
+      border: 2px solid #28a745;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+
+    .verification-title {
+      color: #155724;
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status-warning {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+    }
+
+    .status-info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
     body {
   margin: 0;
   padding: 0;
@@ -94,6 +211,103 @@ nav.navbar {
 
     #matrixForm {
       margin-top: 20px;
+    }
+
+    /* Estilos responsivos para móviles */
+    @media (max-width: 768px) {
+      .result-table {
+        font-size: 11px;
+        border-radius: 8px;
+      }
+
+      .result-table th {
+        padding: 8px 4px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+
+      .result-table td {
+        padding: 6px 3px;
+        font-size: 10px;
+        white-space: nowrap;
+      }
+
+      /* Hacer que la tabla sea scrolleable horizontalmente en móviles */
+      .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+
+      .table-responsive .result-table {
+        min-width: 500px; /* Ancho mínimo para asegurar legibilidad */
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      /* Ajustar el contenedor principal */
+      .container {
+        padding: 15px;
+        margin-top: 20px;
+      }
+
+      /* Ajustar la matriz display */
+      .matrix-display {
+        font-size: 12px;
+        padding: 10px;
+        overflow-x: auto;
+      }
+
+      /* Ajustar los badges de estado */
+      .status-badge {
+        font-size: 10px;
+        padding: 3px 8px;
+      }
+
+      /* Ajustar el highlight de solución */
+      .solution-highlight {
+        font-size: 14px;
+        padding: 12px;
+      }
+
+      /* Ajustar los alerts */
+      .alert {
+        font-size: 12px;
+        padding: 10px;
+      }
+    }
+
+    /* Estilos para pantallas muy pequeñas */
+    @media (max-width: 480px) {
+      .result-table th {
+        padding: 6px 2px;
+        font-size: 10px;
+      }
+
+      .result-table td {
+        padding: 4px 2px;
+        font-size: 9px;
+      }
+
+      .table-responsive .result-table {
+        min-width: 400px;
+      }
+
+      .container {
+        padding: 10px;
+        margin-top: 15px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .btn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
     }
   </style>
 </head>
@@ -115,6 +329,11 @@ nav.navbar {
     <div class="mb-3">
       <label for="matrixSize" class="form-label">Tamaño de la matriz (m x n)</label>
       <input type="number" class="form-control" id="matrixSize" min="2" max="10" placeholder="Ejemplo: 3">
+    </div>
+    <div class="mb-3">
+      <label for="tolerance" class="form-label">Significancia (Tolerancia)</label>
+      <input type="number" class="form-control" id="tolerance" min="0.000001" max="1" step="0.000001" value="0.0001" placeholder="Ejemplo: 0.0001">
+      <div class="form-text">Valor entre 0.000001 y 1. Valores más pequeños = mayor precisión</div>
     </div>
     <button class="btn btn-outline-primary btn-lg w-100" onclick="generateMatrix()">
       <i class="bi bi-grid-3x3-gap-fill me-2"></i>Generar Matriz
@@ -160,376 +379,232 @@ nav.navbar {
     container.innerHTML = html;
   }
 
-  // EN REVISION
-  //SEGUNDO CODIGO / ORIGINAL
-//   function solveMatrix() {
-//   const size = parseInt(document.getElementById("matrixSize").value);
-//   const form = document.getElementById("matrixData");
-//   if (!form) return;
-
-//   const A = [], B = [];
-//   for (let i = 0; i < size; i++) {
-//     A[i] = [];
-//     for (let j = 0; j < size; j++) {
-//       const value = parseFloat(form.querySelector(`[name="a-${i}-${j}"]`).value);
-//       A[i][j] = isNaN(value) ? 0 : value;
-//     }
-//     const bValue = parseFloat(form.querySelector(`[name="b-${i}"]`).value);
-//     B[i] = isNaN(bValue) ? 0 : bValue;
-//   }
-
-//   let resultLog = `📌 Matriz Original (Ingresada):\n`;
-//   for (let i = 0; i < size; i++) {
-//     resultLog += `${A[i].map(v => v.toFixed(2)).join("\t")} = ${B[i].toFixed(2)}\n`;
-//   }
-
-//   // Ordenar la matriz siguiendo tu regla:
-//   const used = new Set();
-//   const newA = [];
-//   const newB = [];
-
-//   for (let col = 0; col < size; col++) {
-//     let maxRow = -1;
-//     let maxValue = -Infinity;
-
-//     for (let i = 0; i < size; i++) {
-//       if (!used.has(i) && Math.abs(A[i][col]) > maxValue) {
-//         maxValue = Math.abs(A[i][col]);
-//         maxRow = i;
-//       }
-//     }
-
-//     if (maxRow !== -1) {
-//       used.add(maxRow);
-//       newA.push(A[maxRow]);
-//       newB.push(B[maxRow]);
-//     }
-//   }
-
-//   resultLog += `\n🔄 Matriz Ordenada:\n`;
-//   for (let i = 0; i < size; i++) {
-//     resultLog += `${newA[i].map(v => v.toFixed(2)).join("\t")} = ${newB[i].toFixed(2)}\n`;
-//   }
-
-//   // Ahora aplicar Gauss-Seidel sobre la matriz ordenada
-//   const tolerance = 0.0001;
-//   const maxIterations = 100;
-//   const x = Array(size).fill(0);
-
-//   resultLog += `\n📌 Método de Gauss-Seidel\nTolerancia: ${tolerance}\nMáx Iteraciones: ${maxIterations}\n\n`;
-
-//   for (let k = 1; k <= maxIterations; k++) {
-//     const xNew = [...x];
-
-//     for (let i = 0; i < size; i++) {
-//       let sum = newB[i];
-//       for (let j = 0; j < size; j++) {
-//         if (j !== i) {
-//           sum -= newA[i][j] * xNew[j];
-//         }
-//       }
-//       xNew[i] = sum / newA[i][i];
-//     }
-
-//     let error = Math.sqrt(x.map((val, i) => Math.pow(xNew[i] - val, 2)).reduce((acc, curr) => acc + curr, 0)) * 100;
-
-//     resultLog += `Iteración ${k}: [${xNew.map(val => val.toFixed(6)).join(", ")}] - Tolerancia: ${error.toFixed(6)}%\n`;
-
-//     let maxError = Math.max(...x.map((val, i) => Math.abs(val - xNew[i])));
-//     if (maxError < tolerance) {
-//       resultLog += `\n✅ Convergencia alcanzada en ${k} iteraciones.`;
-//       document.getElementById("resultArea").innerText = resultLog;
-//       return;
-//     }
-
-//     for (let i = 0; i < size; i++) x[i] = xNew[i];
-//   }
-
-//   resultLog += `\n⚠️ No se alcanzó la convergencia después de ${maxIterations} iteraciones.`;
-//   document.getElementById("resultArea").innerText = resultLog;
-// }
-
-
-// EN REVISION
-//CODIGO CASI
-// function solveMatrix() {
-//   const size = parseInt(document.getElementById("matrixSize").value);
-//   const form = document.getElementById("matrixData");
-//   if (!form) return;
-
-//   const A = [], B = [];
-//   for (let i = 0; i < size; i++) {
-//     A[i] = [];
-//     for (let j = 0; j < size; j++) {
-//       const value = parseFloat(form.querySelector(`[name="a-${i}-${j}"]`).value);
-//       A[i][j] = isNaN(value) ? 0 : value;
-//     }
-//     const bValue = parseFloat(form.querySelector(`[name="b-${i}"]`).value);
-//     B[i] = isNaN(bValue) ? 0 : bValue;
-//   }
-
-//   let resultLog = `📌 Matriz Original (Ingresada):\n`;
-//   for (let i = 0; i < size; i++) {
-//     resultLog += `${A[i].map(v => v.toFixed(2)).join("\t")} = ${B[i].toFixed(2)}\n`;
-//   }
-
-//   // Ordenar la matriz siguiendo la regla de mayor valor absoluto en cada columna
-//   const used = new Set();
-//   const newA = [];
-//   const newB = [];
-
-//   for (let col = 0; col < size; col++) {
-//     let maxRow = -1;
-//     let maxValue = -Infinity;
-
-//     for (let i = 0; i < size; i++) {
-//       if (!used.has(i) && Math.abs(A[i][col]) > maxValue) {
-//         maxValue = Math.abs(A[i][col]);
-//         maxRow = i;
-//       }
-//     }
-
-//     if (maxRow !== -1) {
-//       used.add(maxRow);
-//       newA.push(A[maxRow]);
-//       newB.push(B[maxRow]);
-//     }
-//   }
-
-//   resultLog += `\n🔄 Matriz Ordenada:\n`;
-//   for (let i = 0; i < size; i++) {
-//     resultLog += `${newA[i].map(v => v.toFixed(2)).join("\t")} = ${newB[i].toFixed(2)}\n`;
-//   }
-
-//   // Verificar si la matriz ordenada es diagonalmente dominante
-//   if (!isDiagonallyDominant(newA)) {
-//     resultLog += `⚠️ La matriz ordenada no es diagonalmente dominante. El método podría no converger.\n\n`;
-//   }
-
-//   // Aplicar Gauss-Seidel sobre la matriz ordenada
-//   const tolerance = 0.001; // Ajustar tolerancia según el tamaño
-//   const maxIterations = 100;
-//   const x = Array(size).fill(0);
-
-//   resultLog += `\n📌 Método de Gauss-Seidel\nTolerancia: ${tolerance}\nMáx Iteraciones: ${maxIterations}\n\n`;
-
-//   for (let k = 1; k <= maxIterations; k++) {
-//     const xNew = [...x];
-
-//     for (let i = 0; i < size; i++) {
-//       let sum = newB[i];
-//       for (let j = 0; j < size; j++) {
-//         if (j !== i) {
-//           sum -= newA[i][j] * xNew[j];
-//         }
-//       }
-//       xNew[i] = sum / newA[i][i];
-//     }
-
-//     // Calcular el error relativo máximo
-//     // let error = Math.max(...x.map((val, i) => Math.abs((xNew[i] - val) / (xNew[i] || 1))));
-//     let error = Math.max(...x.map((val, i) => Math.abs(xNew[i] - val)));
-
-//     resultLog += `Iteración ${k}: [${xNew.map(val => val.toFixed(6)).join(", ")}] - Error Relativo: ${(error * 100).toFixed(6)}%\n`;
-
-//     if (error < tolerance) {
-//       resultLog += `\n✅ Convergencia alcanzada en ${k} iteraciones.`;
-//       document.getElementById("resultArea").innerText = resultLog;
-//       return;
-//     }
-
-//     for (let i = 0; i < size; i++) x[i] = xNew[i];
-//   }
-
-//   resultLog += `\n⚠️ No se alcanzó la convergencia después de ${maxIterations} iteraciones.`;
-//   document.getElementById("resultArea").innerText = resultLog;
-// }
-
-// function isDiagonallyDominant(A) {
-//   for (let i = 0; i < A.length; i++) {
-//     const diagonal = Math.abs(A[i][i]);
-//     const offDiagonalSum = A[i].reduce((sum, val, j) => sum + (i !== j ? Math.abs(val) : 0), 0);
-//     if (diagonal <= offDiagonalSum) {
-//       return false;
-//     }
-//   }
-//   return true;
-// }
-
-function solveMatrix() {
-  const size = parseInt(document.getElementById("matrixSize").value);
-  const form = document.getElementById("matrixData");
-  if (!form) return;
-
-  const A = [], B = [];
-  for (let i = 0; i < size; i++) {
-    A[i] = [];
-    for (let j = 0; j < size; j++) {
-      const value = parseFloat(form.querySelector(`[name="a-${i}-${j}"]`).value);
-      A[i][j] = isNaN(value) ? 0 : value;
-    }
-    const bValue = parseFloat(form.querySelector(`[name="b-${i}"]`).value);
-    B[i] = isNaN(bValue) ? 0 : bValue;
-  }
-
-  let resultLog = `📌 Matriz Original (Ingresada):\n`;
-  for (let i = 0; i < size; i++) {
-    resultLog += `${A[i].map(v => v.toFixed(2)).join("\t")} = ${B[i].toFixed(2)}\n`;
-  }
-
-  // Ordenar la matriz siguiendo la regla de mayor valor absoluto en cada columna
-  const used = new Set();
-  const newA = [];
-  const newB = [];
-
-  for (let col = 0; col < size; col++) {
-    let maxRow = -1;
-    let maxValue = -Infinity;
-
-    for (let i = 0; i < size; i++) {
-      if (!used.has(i) && Math.abs(A[i][col]) > maxValue) {
-        maxValue = Math.abs(A[i][col]);
-        maxRow = i;
-      }
-    }
-
-    if (maxRow !== -1) {
-      used.add(maxRow);
-      newA.push(A[maxRow]);
-      newB.push(B[maxRow]);
-    }
-  }
-
-  resultLog += `\n🔄 Matriz Ordenada:\n`;
-  for (let i = 0; i < size; i++) {
-    resultLog += `${newA[i].map(v => v.toFixed(2)).join("\t")} = ${newB[i].toFixed(2)}\n`;
-  }
-
-  // Aplicar Gauss-Seidel sobre la matriz ordenada
-  const tolerance = 0.0001; // Tolerancia fija
-  const maxIterations = 100; // Máximo de iteraciones
-  const x = Array(size).fill(0); // Vector inicial de soluciones
-
-  resultLog += `\n📌 Método de Gauss-Seidel\nTolerancia: ${tolerance}\nMáx Iteraciones: ${maxIterations}\n\n`;
-
-  for (let k = 1; k <= maxIterations; k++) {
-    const xNew = [...x];
-
-    for (let i = 0; i < size; i++) {
-      let sum = newB[i];
-      for (let j = 0; j < size; j++) {
-        if (j !== i) {
-          sum -= newA[i][j] * xNew[j];
-        }
-      }
-      xNew[i] = sum / newA[i][i];
-    }
-
-    // Calcular la tolerancia como la raíz cuadrada de la suma de las diferencias al cuadrado
-    const toleranceValue = Math.sqrt(
-      x.map((val, i) => Math.pow(xNew[i] - val, 2)).reduce((acc, curr) => acc + curr, 0)
-    );
-
-    resultLog += `Iteración ${k}: [${xNew.map(val => val.toFixed(6)).join(", ")}] - Tolerancia: ${toleranceValue.toFixed(6)}\n`;
-
-    if (toleranceValue < tolerance) {
-      resultLog += `\n✅ Convergencia alcanzada en ${k} iteraciones.`;
-      document.getElementById("resultArea").innerText = resultLog;
+  function solveMatrix() {
+    console.log("Función solveMatrix iniciada");
+    
+    const size = parseInt(document.getElementById("matrixSize").value);
+    console.log("Tamaño de matriz:", size);
+    
+    const form = document.getElementById("matrixData");
+    console.log("Formulario encontrado:", form);
+    
+    if (!form) {
+      alert("Por favor genera la matriz primero");
       return;
     }
 
-    for (let i = 0; i < size; i++) x[i] = xNew[i];
+    const A = [], B = [];
+    for (let i = 0; i < size; i++) {
+      A[i] = [];
+      for (let j = 0; j < size; j++) {
+        const value = parseFloat(form.querySelector(`[name="a-${i}-${j}"]`).value);
+        A[i][j] = isNaN(value) ? 0 : value;
+      }
+      const bValue = parseFloat(form.querySelector(`[name="b-${i}"]`).value);
+      B[i] = isNaN(bValue) ? 0 : bValue;
+    }
+    
+    console.log("Matriz A:", A);
+    console.log("Vector B:", B);
+
+    let resultHTML = `<h4 class="mb-3">📊 Resultados del Método Gauss-Seidel</h4>`;
+    
+    // Mostrar matriz original
+    resultHTML += `<div class="matrix-display">`;
+    resultHTML += `<strong>📌 Matriz Original:</strong><br>`;
+    for (let i = 0; i < size; i++) {
+      resultHTML += `${A[i].map(v => v.toFixed(2)).join(" &nbsp;&nbsp; ")} &nbsp;&nbsp; = &nbsp;&nbsp; ${B[i].toFixed(2)}<br>`;
+    }
+    resultHTML += `</div>`;
+
+    // Verificar si la matriz es diagonalmente dominante
+    let isDominant = true;
+    for (let i = 0; i < size; i++) {
+      const diagonal = Math.abs(A[i][i]);
+      const offDiagonalSum = A[i].reduce((sum, val, j) => sum + (i !== j ? Math.abs(val) : 0), 0);
+      if (diagonal <= offDiagonalSum) {
+        isDominant = false;
+        break;
+      }
+    }
+
+    if (!isDominant) {
+      resultHTML += `<div class="alert alert-warning">`;
+      resultHTML += `<span class="status-badge status-warning">⚠️ Advertencia</span> La matriz no es diagonalmente dominante. Intentando reordenar...`;
+      resultHTML += `</div>`;
+      
+      // Intentar reordenar la matriz para mejorar la convergencia
+      const used = new Set();
+      const newA = [];
+      const newB = [];
+
+      for (let col = 0; col < size; col++) {
+        let maxRow = -1;
+        let maxValue = -Infinity;
+
+        for (let i = 0; i < size; i++) {
+          if (!used.has(i) && Math.abs(A[i][col]) > maxValue) {
+            maxValue = Math.abs(A[i][col]);
+            maxRow = i;
+          }
+        }
+
+        if (maxRow !== -1) {
+          used.add(maxRow);
+          newA.push(A[maxRow]);
+          newB.push(B[maxRow]);
+        }
+      }
+
+      // Si quedaron filas sin usar, agregarlas al final
+      for (let i = 0; i < size; i++) {
+        if (!used.has(i)) {
+          newA.push(A[i]);
+          newB.push(B[i]);
+        }
+      }
+
+      resultHTML += `<div class="matrix-display">`;
+      resultHTML += `<strong>🔄 Matriz Reordenada:</strong><br>`;
+      for (let i = 0; i < size; i++) {
+        resultHTML += `${newA[i].map(v => v.toFixed(2)).join(" &nbsp;&nbsp; ")} &nbsp;&nbsp; = &nbsp;&nbsp; ${newB[i].toFixed(2)}<br>`;
+      }
+      resultHTML += `</div>`;
+
+      // Verificar si la matriz reordenada es diagonalmente dominante
+      let isReorderedDominant = true;
+      for (let i = 0; i < size; i++) {
+        const diagonal = Math.abs(newA[i][i]);
+        const offDiagonalSum = newA[i].reduce((sum, val, j) => sum + (i !== j ? Math.abs(val) : 0), 0);
+        if (diagonal <= offDiagonalSum) {
+          isReorderedDominant = false;
+          break;
+        }
+      }
+
+      if (!isReorderedDominant) {
+        resultHTML += `<div class="alert alert-warning">`;
+        resultHTML += `<span class="status-badge status-warning">⚠️ Advertencia</span> La matriz reordenada tampoco es diagonalmente dominante. El método podría no converger.`;
+        resultHTML += `</div>`;
+      } else {
+        resultHTML += `<div class="alert alert-success">`;
+        resultHTML += `<span class="status-badge status-success">✅ Éxito</span> La matriz reordenada es diagonalmente dominante.`;
+        resultHTML += `</div>`;
+      }
+
+      // Usar la matriz reordenada
+      A.length = 0;
+      B.length = 0;
+      A.push(...newA);
+      B.push(...newB);
+    } else {
+      resultHTML += `<div class="alert alert-success">`;
+      resultHTML += `<span class="status-badge status-success">✅ Éxito</span> La matriz es diagonalmente dominante.`;
+      resultHTML += `</div>`;
+    }
+
+    // Obtener la tolerancia del usuario
+    const tolerance = parseFloat(document.getElementById("tolerance").value);
+    const maxIterations = Math.max(100, size * 20);
+    const x = Array(size).fill(0);
+
+    resultHTML += `<div class="alert alert-info">`;
+    resultHTML += `<strong>📌 Parámetros del método:</strong><br>`;
+    resultHTML += `• Tolerancia: ${tolerance}<br>`;
+    resultHTML += `• Máximo de iteraciones: ${maxIterations}`;
+    resultHTML += `</div>`;
+
+    // Tabla de iteraciones
+    resultHTML += `<div class="table-responsive">`;
+    resultHTML += `<table class="result-table">`;
+    resultHTML += `<thead>`;
+    resultHTML += `<tr>`;
+    resultHTML += `<th>Iteración</th>`;
+    for (let i = 0; i < size; i++) {
+      resultHTML += `<th>X${i + 1}</th>`;
+    }
+    resultHTML += `<th>Error</th>`;
+    resultHTML += `</tr>`;
+    resultHTML += `</thead>`;
+    resultHTML += `<tbody>`;
+
+    let converged = false;
+    let finalIteration = 0;
+    let xNew = Array(size).fill(0);
+
+    for (let k = 1; k <= maxIterations; k++) {
+      xNew = [...x];
+
+      for (let i = 0; i < size; i++) {
+        let sum = B[i];
+        for (let j = 0; j < size; j++) {
+          if (j !== i) {
+            sum -= A[i][j] * xNew[j];
+          }
+        }
+        xNew[i] = sum / A[i][i];
+      }
+
+      // Calcular el error usando la norma euclidiana (fórmula estándar de Gauss-Seidel)
+      let error = 0;
+      if (k > 1) { // Solo calcular error desde la segunda iteración
+        let sumSquaredDifferences = 0;
+        for (let i = 0; i < size; i++) {
+          sumSquaredDifferences += Math.pow(xNew[i] - x[i], 2);
+        }
+        error = Math.sqrt(sumSquaredDifferences) * 100; // Multiplicar por 100
+      }
+
+      // Determinar la clase de la fila
+      let rowClass = "iteration-row";
+      if (k > 1 && error < tolerance) {
+        rowClass = "success-row";
+        converged = true;
+        finalIteration = k;
+      }
+
+      resultHTML += `<tr class="${rowClass}">`;
+      resultHTML += `<td><strong>${k}</strong></td>`;
+      for (let i = 0; i < size; i++) {
+        resultHTML += `<td>${xNew[i].toFixed(6)}</td>`;
+      }
+      if (k === 1) {
+        resultHTML += `<td><strong>-</strong></td>`; // No hay error en la primera iteración
+      } else {
+        resultHTML += `<td><strong>${error.toFixed(6)}%</strong></td>`;
+      }
+      resultHTML += `</tr>`;
+
+      if (k > 1 && error < tolerance) {
+        break;
+      }
+
+      for (let i = 0; i < size; i++) x[i] = xNew[i];
+    }
+
+    resultHTML += `</tbody>`;
+    resultHTML += `</table>`;
+    resultHTML += `</div>`;
+
+    if (converged) {
+      resultHTML += `<div class="solution-highlight">`;
+      resultHTML += `🎯 <strong>Solución Final</strong><br>`;
+      resultHTML += `Convergencia alcanzada en ${finalIteration} iteraciones<br>`;
+      resultHTML += `[${xNew.map(val => val.toFixed(6)).join(", ")}]`;
+      resultHTML += `</div>`;
+    } else {
+      resultHTML += `<div class="alert alert-warning">`;
+      resultHTML += `<span class="status-badge status-warning">⚠️ Sin Convergencia</span> No se alcanzó la convergencia después de ${maxIterations} iteraciones.`;
+      resultHTML += `</div>`;
+      resultHTML += `<div class="solution-highlight">`;
+      resultHTML += `📊 <strong>Última Aproximación</strong><br>`;
+      resultHTML += `[${xNew.map(val => val.toFixed(6)).join(", ")}]`;
+      resultHTML += `</div>`;
+    }
+
+    document.getElementById("resultArea").innerHTML = resultHTML;
   }
-
-  resultLog += `\n⚠️ No se alcanzó la convergencia después de ${maxIterations} iteraciones.`;
-  document.getElementById("resultArea").innerText = resultLog;
-}
-
-
-// EN REVISION
-//TERCER CODIGO
-
-// function isDiagonallyDominant(A) {
-//   for (let i = 0; i < A.length; i++) {
-//     const diagonal = Math.abs(A[i][i]);
-//     const offDiagonalSum = A[i].reduce((sum, val, j) => sum + (i !== j ? Math.abs(val) : 0), 0);
-//     if (diagonal <= offDiagonalSum) {
-//       return false;
-//     }
-//   }
-//   return true;
-// }
-
-// function solveMatrix() {
-//   const size = parseInt(document.getElementById("matrixSize").value);
-//   const form = document.getElementById("matrixData");
-//   if (!form) return;
-
-//   const A = [], B = [];
-//   for (let i = 0; i < size; i++) {
-//     A[i] = [];
-//     for (let j = 0; j < size; j++) {
-//       const value = parseFloat(form.querySelector(`[name="a-${i}-${j}"]`).value);
-//       A[i][j] = isNaN(value) ? 0 : value;
-//     }
-//     const bValue = parseFloat(form.querySelector(`[name="b-${i}"]`).value);
-//     B[i] = isNaN(bValue) ? 0 : bValue;
-//   }
-
-//   let resultLog = `📌 Matriz Original (Ingresada):\n`;
-//   for (let i = 0; i < size; i++) {
-//     resultLog += `${A[i].map(v => v.toFixed(2)).join("\t")} = ${B[i].toFixed(2)}\n`;
-//   }
-
-//   // Verificar si la matriz es diagonalmente dominante
-//   if (!isDiagonallyDominant(A)) {
-//     resultLog += `⚠️ La matriz no es diagonalmente dominante. El método podría no converger.\n\n`;
-//   }
-
-//   // Aplicar Gauss-Seidel
-//   // const tolerance = 0.0001;
-//   const tolerance = size > 3 ? 0.0001 : 0.001;
-//   const maxIterations = 100;
-//   const x = Array(size).fill(0);
-
-//   resultLog += `\n📌 Método de Gauss-Seidel\nTolerancia: ${tolerance}\nMáx Iteraciones: ${maxIterations}\n\n`;
-
-//   for (let k = 1; k <= maxIterations; k++) {
-//     const xNew = [...x];
-
-//     for (let i = 0; i < size; i++) {
-//       let sum = B[i];
-//       for (let j = 0; j < size; j++) {
-//         if (j !== i) {
-//           sum -= A[i][j] * xNew[j];
-//         }
-//       }
-//       xNew[i] = sum / A[i][i];
-//     }
-
-//     // let error = Math.max(...x.map((val, i) => Math.abs(xNew[i] - val)));
-//     let error = Math.max(...x.map((val, i) => Math.abs((xNew[i] - val) / (xNew[i] || 1))));
-//     resultLog += `Iteración ${k}: [${xNew.map(val => val.toFixed(6)).join(", ")}] - Error: ${error.toFixed(6)}\n`;
-
-//     if (error < tolerance) {
-//       resultLog += `\n✅ Convergencia alcanzada en ${k} iteraciones.`;
-//       document.getElementById("resultArea").innerText = resultLog;
-//       return;
-//     }
-
-//     for (let i = 0; i < size; i++) x[i] = xNew[i];
-//   }
-
-//   resultLog += `\n⚠️ No se alcanzó la convergencia después de ${maxIterations} iteraciones.`;
-//   document.getElementById("resultArea").innerText = resultLog;
-// }
-
-
 </script>
 
 </body>
 </html>
-
-
-
-
